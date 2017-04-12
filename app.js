@@ -135,3 +135,21 @@ var nextStep = function() {
         }
     });
 };
+
+var showCards = function() {
+    // read the log.txt file
+    fs.readFile('./log.txt', 'utf8', function(error, data) {
+
+        if (error) {
+            console.log("There was a glitch in the Matrix: " + error);
+        }
+        var questions = data.split(';');
+        var notBlank = function(value) {
+            return value;
+        }; //someone said i should link where i got this from     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+        questions = questions.filter(notBlank);
+        var count = 0;
+        showQuestion(questions, count);
+    });
+};
+
