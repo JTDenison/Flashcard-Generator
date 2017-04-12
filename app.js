@@ -153,3 +153,34 @@ var showCards = function() {
     });
 };
 
+// show the questions
+//parsed questions
+var showQuestion = function(array, index) {
+    question = array[index];
+    var jSONparse = JSON.parse(question); // added JSON.parse var for housekeeping
+    var questionText;
+    var correctReponse;
+    if (jSONparse.type === 'basic') {
+        questionText = jSONparse.front;
+        correctReponse = jSONparse.back;
+    } else if (jSONparse.type === 'cloze') {
+        questionText = jSONparse.clozeDeleted;
+        correctReponse = jSONparse.cloze;
+    }
+    inquirer.prompt([{
+        name: 'response',
+        message: questionText
+    }]).then(function(answer) {
+        if (answer.response === correctReponse) {
+            console.log('You got it duuuuuuude!');
+            if (index < array.length - 1) {
+                showQuestion(array, index + 1);
+            }
+        } else {
+            console.log('That is incorrect...');
+            if (index < array.length - 1) {
+                showQuestion(array, index + 1);
+            }
+        }
+    });
+};
