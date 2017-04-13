@@ -44,7 +44,7 @@ var addCard = function() {
                 name: 'front',
                 message: 'What is the question?',
 
-                // validate function to ensure user inputs data, else return true
+                // validate function (input) to ensure user inputs data, else return true
                 validate: function(input) {
                     if (input === '') {
                         console.log('Please provide a question');
@@ -72,10 +72,10 @@ var addCard = function() {
         } else if (answer.cardType === 'cloze-flashcard') {
             inquirer.prompt([{
                 name: 'text',
-                message: 'What is the full text?', // User inputs entire question
+                message: 'What is the full question?', // User inputs entire question
                 validate: function(input) {
                     if (input === '') {
-                        console.log('Please provide the full text');
+                        console.log('Please provide the full question');
                         return false;
                     } else {
                         return true;
@@ -101,7 +101,7 @@ var addCard = function() {
                     newCloze.create(); // make clozed card
                     nextStep();
                 } else { // make sure cloze === removed
-                    console.log('The cloze portion you provided is not found in the full text. Please try again.');
+                    console.log('The cloze you provided is not found in the text. Please try again.');
                     addCard();
                 }
             });
